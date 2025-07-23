@@ -1,0 +1,41 @@
+# create a hive table bank_table with these columns age,job,marital,education,default,balance,housing,loan,contact,day,month,duration,campaign,pdays,previous,poutcome,y
+
+CREATE TABLE bank_table (
+    age INT,
+    job STRING,
+    marital STRING,
+    education STRING,
+    default STRING,
+    balance INT,
+    housing STRING,
+    loan STRING,
+    contact STRING,
+    day INT,
+    month STRING,
+    duration INT,
+    campaign INT,
+    pdays INT,
+    previous INT,
+    poutcome STRING,
+    y STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LOCATION '/media/sudip/linux-extra/code/almabetter/hadoop-spark-hive/bank.csv';
+
+
+# Load data into the bank_table from the specified CSV file
+LOAD DATA LOCAL INPATH '/media/sudip/linux-extra/code/almabetter/hadoop-spark-hive/bank.csv'
+INTO TABLE bank_table;
+
+# get the count of records in the bank_table
+SELECT COUNT(*) FROM bank_table;
+
+# get top 5 records from the bank_table
+SELECT * FROM bank_table LIMIT 5;
+
+# get distinct values of the 'job' 
+SELECT DISTINCT job FROM bank_table;
+
+# get total y=yes and y=no records
+SELECT y, COUNT(*) AS count FROM bank_table GROUP BY y;
